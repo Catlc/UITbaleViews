@@ -44,7 +44,7 @@
  @return instancetype
  */
 
-+ (instancetype)cellComfigWithClassName:(NSString *)className
++ (instancetype)cellConfigWithClassName:(NSString *)className
                                  title:(NSString *)title
                         showInfoMethod:(SEL)showInfoMethod
                           heightOfCell:(CGFloat)heightOfCell;
@@ -62,12 +62,11 @@
 @property (nonatomic,assign)CGFloat dynamicHeightOfCell;
 
 ///缓存高度
-- (CGFloat)heightCachedWothCalculateBlock:(CGFloat (^)(void))block;
+- (CGFloat)heightCachedWithCalculateBlock:(CGFloat (^)(void))block;
 
 #pragma mark -Assist
 /// 根据类名，快捷注册cell
 - (void)registerForTableView:(UITableView *)tableView;
-
 
 
 @end

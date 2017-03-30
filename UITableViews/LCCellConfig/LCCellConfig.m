@@ -20,7 +20,7 @@
  @return instancetype
  */
 
-+(instancetype)cellComfigWithClassName:(NSString *)className title:(NSString *)title showInfoMethod:(SEL)showInfoMethod heightOfCell:(CGFloat)heightOfCell
++(instancetype)cellConfigWithClassName:(NSString *)className title:(NSString *)title showInfoMethod:(SEL)showInfoMethod heightOfCell:(CGFloat)heightOfCell
 {
     LCCellConfig *cellConfig = [LCCellConfig new];
     
@@ -81,7 +81,7 @@
 }
 #pragma mark - Dynamic Height 
 /// 缓存高度
-- (CGFloat)heightCachedWothCalculateBlock:(CGFloat (^)(void))block
+- (CGFloat)heightCachedWithCalculateBlock:(CGFloat (^)(void))block
 {
     if (!self.dynamicHeightOfCell && block) {
         //没有计算过高度
