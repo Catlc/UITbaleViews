@@ -27,12 +27,14 @@
 
 + (CGFloat)returnCellHeight:(InfoModel *)comment
 {
-    return 90;
+    return 180;
 }
 -(void)showInfo:(InfoModel *)model
 {
+    _videoImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:model.infoArray[0]]];
+    _videoImage.frame = CGRectMake(75, 0, kWidthOfScreen - 75-20, 180);
+    [self.contentView addSubview:_videoImage];
     
-    NSLog(@"%@",model);
 }
 
 

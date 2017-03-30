@@ -18,7 +18,6 @@
 #import "InfoModel.h"
 #import "LCCellConfig.h"
 
-
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *mainTableView;
@@ -40,22 +39,21 @@
     
     [self addAllViews];
     
-    NSLog(@"%@",self.infoArray);
     
-
+    
 }
 #pragma mark - TableView DataSource
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+    return self.dataArray.count;;
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     LCCellConfig *cellConfig = self.dataArray[indexPath.row];
     NSLog(@"cellClass is %@",cellConfig.className);
 
@@ -65,6 +63,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -77,13 +76,13 @@
     }];
 
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"点击Cell");
     
 }
 #pragma mark - get
--(UITableView *)mainTableView
+- (UITableView *)mainTableView
 {
     if (!_mainTableView) {
         _mainTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -91,47 +90,38 @@
     
     return _mainTableView;
 }
--(NSMutableArray *)infoArray
+- (id)getJsonDataJsonname:(NSString *)jsonname
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:jsonname ofType:@"geojson"];
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
+    NSError *error;
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    if (!jsonData || error) {
+        //DLog(@"JSON解码失败");
+        return nil;
+    } else {
+        return jsonObj;
+    }
+}
+- (NSMutableArray *)infoArray
 {
 
     if (!_infoArray) {
         
         _infoArray = [NSMutableArray new];
-        for (int i = 0; i<4; i++) {
+        
+        NSArray *datas = [self getJsonDataJsonname:@"SheepInfo"][@"data"];
+        for (NSDictionary *dict in datas) {
             InfoModel *model = [InfoModel new];
-            model.type  = [NSString stringWithFormat:@"%d",i];
-            model.time  = [NSString stringWithFormat:@"2017.4.%d",i];
-            model.title = [NSString stringWithFormat:@"标题:%d",i];
+            model.type  = dict[@"type"];
+            model.time  = dict[@"time"];
+            model.title = dict[@"title"];
             model.identifyUrl = nil;
-            switch (i) {
-                case 0:
-                {
-                    model.infoArray = @[@"loading1.jpg",@"loading2.jpg",@"loading3.jpg",@"splashscreens.jpg"];
-                }
-                    break;
-                case 1:
-                {
-                    model.infoArray = @[@"注射：羊三联菌苗 5ml",@"预防:羊快疫，羊肠吐血",@"免疫期：半年"];
-                }
-                    break;
-                case 2:
-                {
-                    model.infoArray = @[@"fdfd.png"];
-
-                }
-                    break;
-                case 3:
-                {
-                    model.infoArray = @[@"天气:多云 -8~5°C",@"湿度:87%",@"风力:西北风2级",@"空气质量指数:30（优）",@"紫外线强度:弱"];
-
-                }
-                    break;
-                 default:
-                    break;
-            }
-            
+            model.infoArray = dict[@"infoArray"];
             [_infoArray addObject:model];
+
         }
+        
         
     }
     
@@ -139,7 +129,7 @@
 }
 
 
--(NSMutableArray *)dataArray
+- (NSMutableArray *)dataArray
 {
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];

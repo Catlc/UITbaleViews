@@ -10,5 +10,7 @@
 
 @interface VideoCell : BaseInfoCell
 
+@property(nonatomic,strong)UIImageView *videoImage;
+
  
 @end

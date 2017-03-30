@@ -10,5 +10,8 @@
 
 @interface WetherCell : BaseInfoCell
 
+@property(nonatomic,strong)UIView *baseView;
+
+
 
 @end

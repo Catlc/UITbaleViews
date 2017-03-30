@@ -10,6 +10,6 @@
 
 @interface SheepInfoCell : BaseInfoCell
 
- 
+@property(nonatomic,strong)UIView *baseView;
 
 @end

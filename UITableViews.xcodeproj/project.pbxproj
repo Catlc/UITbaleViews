@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		00C1D3A2F381A4443474C080 /* libPods-UITableViewsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DD77AA63884DF196BF5EB8 /* libPods-UITableViewsUITests.a */; };
 		50A294179B3104E49478DC24 /* libPods-UITableViews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 958DD6CD2A644B2E432A1951 /* libPods-UITableViews.a */; };
+		5AF7CE371E8D71C0001B4854 /* 2405c55c1038534314d9ef339013b07eca8088b9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5AF7CE361E8D71C0001B4854 /* 2405c55c1038534314d9ef339013b07eca8088b9.jpg */; };
+		5AF7CE3A1E8D7702001B4854 /* SheepInfo.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 5AF7CE391E8D7702001B4854 /* SheepInfo.geojson */; };
 		613DD63565BBF370B267D494 /* libPods-UITableViewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B3D1E3A62F229D3AF8B133 /* libPods-UITableViewsTests.a */; };
 		FE4812E71E8CB4DD004671EF /* LCCellConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4812E61E8CB4DD004671EF /* LCCellConfig.m */; };
 		FE4812EF1E8CB61C004671EF /* UIView+Shortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4812EE1E8CB61C004671EF /* UIView+Shortcut.m */; };
@@ -79,6 +81,8 @@
 		13B3D1E3A62F229D3AF8B133 /* libPods-UITableViewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UITableViewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6EE6202E8836E060534FF1 /* Pods-UITableViewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UITableViewsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UITableViewsUITests/Pods-UITableViewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		51637CA6AC3BB050053A8833 /* Pods-UITableViewsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UITableViewsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UITableViewsTests/Pods-UITableViewsTests.release.xcconfig"; sourceTree = "<group>"; };
+		5AF7CE361E8D71C0001B4854 /* 2405c55c1038534314d9ef339013b07eca8088b9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2405c55c1038534314d9ef339013b07eca8088b9.jpg; sourceTree = "<group>"; };
+		5AF7CE391E8D7702001B4854 /* SheepInfo.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SheepInfo.geojson; sourceTree = "<group>"; };
 		6333D61C7DFC9C12D9B00B00 /* Pods-UITableViewsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UITableViewsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UITableViewsTests/Pods-UITableViewsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E926F5D0A0981741AD39078 /* Pods-UITableViews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UITableViews.release.xcconfig"; path = "Pods/Target Support Files/Pods-UITableViews/Pods-UITableViews.release.xcconfig"; sourceTree = "<group>"; };
 		958DD6CD2A644B2E432A1951 /* libPods-UITableViews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UITableViews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -507,6 +511,8 @@
 		FEF106941E8C943E00DFE6B5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5AF7CE391E8D7702001B4854 /* SheepInfo.geojson */,
+				5AF7CE361E8D71C0001B4854 /* 2405c55c1038534314d9ef339013b07eca8088b9.jpg */,
 				FE4813601E8D0A9E004671EF /* loading1.jpg */,
 				FE4813611E8D0A9E004671EF /* loading2.jpg */,
 				FE4813621E8D0A9E004671EF /* loading3.jpg */,
@@ -652,6 +658,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AF7CE371E8D71C0001B4854 /* 2405c55c1038534314d9ef339013b07eca8088b9.jpg in Resources */,
+				5AF7CE3A1E8D7702001B4854 /* SheepInfo.geojson in Resources */,
 				FE4813661E8D0A9E004671EF /* loading3.jpg in Resources */,
 				FE48135B1E8D0506004671EF /* ZLPhotoLib.bundle in Resources */,
 				FE4813651E8D0A9E004671EF /* loading2.jpg in Resources */,
