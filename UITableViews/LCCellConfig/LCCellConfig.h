@@ -49,11 +49,11 @@
                         showInfoMethod:(SEL)showInfoMethod
                           heightOfCell:(CGFloat)heightOfCell;
 /// 根据cellConfig 生成Cell，重用ID为cell类名
-- (UITableViewCell *)cellOfCellConfigWithTableView:(UITableView *)tableView
+- (BaseInfoCell *)cellOfCellConfigWithTableView:(UITableView *)tableView
                                          dataModel:(id)dataModel;
 
 /// 根据cellConfig 生成Cell，重用ID为cell类名 可用Nib
-- (UITableViewCell *)cellOfCellConfigWithTableView:(UITableView *)tableView
+- (BaseInfoCell *)cellOfCellConfigWithTableView:(UITableView *)tableView
                                          dataModel:(id)dataModel
                                              isNib:(BOOL)isNib;
 

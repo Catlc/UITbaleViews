@@ -32,18 +32,18 @@
     return cellConfig;
 }
 /// 根据cellConfig生成cell，重用ID为cell类名
--(UITableViewCell *)cellOfCellConfigWithTableView:(UITableView *)tableView dataModel:(id)dataModel
+-(BaseInfoCell *)cellOfCellConfigWithTableView:(UITableView *)tableView dataModel:(id)dataModel
 {
     return [self cellOfCellConfigWithTableView:tableView dataModel:dataModel isNib:NO];
 }
 /// 根据cellConfig生成cell，重用ID为cell类名,可使用Nib
--(UITableViewCell *)cellOfCellConfigWithTableView:(UITableView *)tableView dataModel:(id)dataModel isNib:(BOOL)isNib
+-(BaseInfoCell *)cellOfCellConfigWithTableView:(UITableView *)tableView dataModel:(id)dataModel isNib:(BOOL)isNib
 
 {
     
     Class cellClass = NSClassFromString(self.className);
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellID]];
+    BaseInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellID]];
     
     if (!cell) {
         

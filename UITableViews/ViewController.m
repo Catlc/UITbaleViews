@@ -17,8 +17,16 @@
 #import "SheepInfoCell.h"
 #import "InfoModel.h"
 #import "LCCellConfig.h"
+#import "ZLPhotoPickerBrowserViewController.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "BaseInfoCell.h"
+
+@interface ViewController ()
+<
+UITableViewDelegate,
+UITableViewDataSource,
+BaseInfoCellDelegate
+>
 
 @property(nonatomic,strong)UITableView *mainTableView;
 
@@ -39,8 +47,6 @@
     
     [self addAllViews];
     
-    
-    
 }
 #pragma mark - TableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -53,28 +59,48 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     LCCellConfig *cellConfig = self.dataArray[indexPath.row];
-    NSLog(@"cellClass is %@",cellConfig.className);
-
+    
     // 拿到对应cell并根据模型显示
-    UITableViewCell *cell = nil;
+    BaseInfoCell *cell = nil;
     cell = [cellConfig cellOfCellConfigWithTableView:tableView dataModel:self.infoArray[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    cell.delegate = self;
+    
+    if ([cell isKindOfClass:[PhotosCell class]]) {
+        
+    }
+    
     return cell;
     
+}
+- (void)didClickImageAtIndex:(NSInteger)index withAssets:(NSArray *)assets
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    // 图片游览器
+    ZLPhotoPickerBrowserViewController *pickerBrowser = [[ZLPhotoPickerBrowserViewController alloc] init];
+    // 数据源/delegate
+    pickerBrowser.photos = assets;
+    // 当前选中的值
+    pickerBrowser.currentIndex = indexPath.row;
+    // 展示控制器
+    [pickerBrowser showPickerVc:self];
+    
+}
+-(void)didClickVideoWithUrl:(NSString *)videoUrl
+{
+    [self sharePush];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LCCellConfig *cellConfig = self.dataArray[indexPath.row];
     Class cellClass = NSClassFromString(cellConfig.className);
-//    NSLog(@"cellClass is %@",cellConfig.className);
-
+    
     return [cellConfig heightCachedWithCalculateBlock:^CGFloat{
         return [cellClass returnCellHeight: self.infoArray[indexPath.row]];
     }];
-
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -87,7 +113,7 @@
     if (!_mainTableView) {
         _mainTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     }
-    
+    _mainTableView.backgroundColor = [UIColor lightGrayColor];
     return _mainTableView;
 }
 - (id)getJsonDataJsonname:(NSString *)jsonname
@@ -105,7 +131,7 @@
 }
 - (NSMutableArray *)infoArray
 {
-
+    
     if (!_infoArray) {
         
         _infoArray = [NSMutableArray new];
@@ -119,10 +145,8 @@
             model.identifyUrl = nil;
             model.infoArray = dict[@"infoArray"];
             [_infoArray addObject:model];
-
-        }
-        
-        
+            
+        }        
     }
     
     return _infoArray;
@@ -134,6 +158,7 @@
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
         NSArray *cellClassArray = @[@"PhotosCell",@"SheepInfoCell",@"VideoCell",@"WetherCell"];
+        
         for (InfoModel *model in self.infoArray) {
             
             Class cellClass = NSClassFromString(cellClassArray[[model.type intValue]]);

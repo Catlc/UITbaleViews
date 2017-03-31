@@ -46,9 +46,7 @@
         lab.text = model.infoArray[i];
         [_baseView addSubview:lab];
     }
-
     
-
 }
 
 

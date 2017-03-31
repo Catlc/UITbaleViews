@@ -43,7 +43,6 @@ static const NSInteger numPicsOfLine = 3;
 {
     if (!_pickView) {
         _pickView = [UIView new];
-//        _pickView.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:_pickView];
     }
     return _pickView;
@@ -63,8 +62,7 @@ static const NSInteger numPicsOfLine = 3;
     
     CGFloat width = (kWidthOfScreen - 74 - picMargin * 2) / 3;
     
-    NSLog(@"model.infoArray is %@",model.infoArray);
-    
+     
     for (int i = 0; i < model.infoArray.count; i++) {
         NSInteger row = i / numPicsOfLine;
         NSInteger col = i % numPicsOfLine;
@@ -74,18 +72,26 @@ static const NSInteger numPicsOfLine = 3;
         NSString *imageUrl = model.infoArray[i];
         
         ZLPhotoPickerBrowserPhoto *photo = [[ZLPhotoPickerBrowserPhoto alloc] init];
-        photo.photoURL = [NSURL URLWithString:imageUrl];
+//        photo.photoURL = [NSURL URLWithString:imageUrl];
+        photo.photoImage =[UIImage imageNamed:imageUrl];
         [_photos addObject:photo];
         
-        [imageView setImage:[UIImage imageNamed:model.infoArray[i]]];
+        [imageView setImage:[UIImage imageNamed:imageUrl]];
         [self.pickView addSubview:imageView];
         imageView.userInteractionEnabled = YES;
-//        [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scanPicture:)]];
+        [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scanPicture:)]];
         imageView.tag = i;
     }
     
     self.pickView.frame = CGRectMake(74, 0, kWidthOfScreen - 74 - picMargin * 2, 0);
     self.pickView.height = width * ((model.infoArray.count - 1) / numPicsOfLine + 1) + 16;
+    
+}
+- (void)scanPicture:(UITapGestureRecognizer *)tap {
+    
+    if ([self.delegate respondsToSelector:@selector(didClickImageAtIndex:withAssets:)]) {
+        [self.delegate didClickImageAtIndex:tap.view.tag withAssets:self.photos];
+    }
     
 }
 

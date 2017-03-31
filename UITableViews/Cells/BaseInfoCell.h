@@ -9,7 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "InfoModel.h"
 
+@protocol BaseInfoCellDelegate <NSObject>
+
+- (void)didClickImageAtIndex:(NSInteger)index withAssets:(NSArray *)assets;
+
+- (void)didClickVideoWithUrl:(NSString *)videoUrl;
+
+
+@end
+
 @interface BaseInfoCell : UITableViewCell
+
+
+@property (weak, nonatomic) id <BaseInfoCellDelegate> delegate;
+
 
 /// 返回Cell高度
 + (CGFloat)returnCellHeight:(InfoModel *)comment;

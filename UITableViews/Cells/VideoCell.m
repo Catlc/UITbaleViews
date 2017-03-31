@@ -8,6 +8,12 @@
 
 #import "VideoCell.h"
 
+@interface VideoCell()
+
+@property(nonatomic,copy)NSString *videoUrl;
+
+@end
+
 @implementation VideoCell
 
 - (void)awakeFromNib {
@@ -19,10 +25,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    
-    
-    
-    
 }
 
 + (CGFloat)returnCellHeight:(InfoModel *)comment
@@ -32,9 +34,18 @@
 -(void)showInfo:(InfoModel *)model
 {
     _videoImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:model.infoArray[0]]];
+    _videoImage.userInteractionEnabled = YES;
+    [_videoImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo:)]];
+    _videoUrl = @"www.baidu.com"; //model.identifyUrl;
     _videoImage.frame = CGRectMake(75, 0, kWidthOfScreen - 75-20, 180);
     [self.contentView addSubview:_videoImage];
     
+}
+-(void)playVideo:(UITapGestureRecognizer *)tap
+{
+    if ([self.delegate respondsToSelector:@selector(didClickVideoWithUrl:)]) {
+        [self.delegate didClickVideoWithUrl:self.videoUrl];
+    }
 }
 
 
