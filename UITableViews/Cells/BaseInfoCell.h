@@ -6,6 +6,10 @@
 //  Copyright © 2017年 LC. All rights reserved.
 //
 
+
+#define  iWidthOfCell   120
+
+
 #import <UIKit/UIKit.h>
 #import "InfoModel.h"
 
@@ -20,9 +24,18 @@
 
 @interface BaseInfoCell : UITableViewCell
 
+///UI
+@property(nonatomic,strong)UILabel *timeLab;
 
+@property(nonatomic,strong)UIImageView *typeImageV;
+
+@property(nonatomic,strong)UILabel *tlineLab;
+
+@property(nonatomic,strong)UILabel *blineLab;
+
+
+/// BaseInfoCellDelegate
 @property (weak, nonatomic) id <BaseInfoCellDelegate> delegate;
-
 
 /// 返回Cell高度
 + (CGFloat)returnCellHeight:(InfoModel *)comment;

@@ -6,16 +6,18 @@ target 'UITableViews' do
   # use_frameworks!
 
   # Pods for UITableViews
-
+ 	pod 'SDWebImage'
+        pod 'Masonry'
   target 'UITableViewsTests' do
     inherit! :search_paths
     # Pods for testing
-	pod 'SDWebImage' 
+	
   end
 
   target 'UITableViewsUITests' do
     inherit! :search_paths
     # Pods for testing
+	 
   end
 
 end

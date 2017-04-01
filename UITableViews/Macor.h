@@ -9,11 +9,13 @@
 #ifndef Macor_h
 #define Macor_h
 
+#import <UIKit/UIKit.h>
 #import "UIView+Shortcut.h"
 #import "BaseInfoCell.h"
+#import "Masonry.h"
 
 #endif /* Macor_h */
 
-#define kWidthOfScreen [UIScreen mainScreen].bounds.size.width
+#define kWidthOfScreen  [UIScreen mainScreen].bounds.size.width
 
 #define kHeightOfScreen [UIScreen mainScreen].bounds.size.height

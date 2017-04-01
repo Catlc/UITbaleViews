@@ -58,6 +58,8 @@
 		FEF106A41E8C943E00DFE6B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEF106A21E8C943E00DFE6B5 /* LaunchScreen.storyboard */; };
 		FEF106AF1E8C943E00DFE6B5 /* UITableViewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF106AE1E8C943E00DFE6B5 /* UITableViewsTests.m */; };
 		FEF106BA1E8C943E00DFE6B5 /* UITableViewsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF106B91E8C943E00DFE6B5 /* UITableViewsUITests.m */; };
+		FEFFA5FC1E8F87190069CDC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEFFA5FB1E8F87190069CDC2 /* UIKit.framework */; };
+		FEFFA5FE1E8F87280069CDC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEFFA5FD1E8F87280069CDC2 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +182,8 @@
 		FEF106B51E8C943E00DFE6B5 /* UITableViewsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITableViewsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF106B91E8C943E00DFE6B5 /* UITableViewsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITableViewsUITests.m; sourceTree = "<group>"; };
 		FEF106BB1E8C943E00DFE6B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEFFA5FB1E8F87190069CDC2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FEFFA5FD1E8F87280069CDC2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEFFA5FE1E8F87280069CDC2 /* Foundation.framework in Frameworks */,
+				FEFFA5FC1E8F87190069CDC2 /* UIKit.framework in Frameworks */,
 				50A294179B3104E49478DC24 /* libPods-UITableViews.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +232,8 @@
 		A0F030512ED2148518D5FBB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FEFFA5FD1E8F87280069CDC2 /* Foundation.framework */,
+				FEFFA5FB1E8F87190069CDC2 /* UIKit.framework */,
 				958DD6CD2A644B2E432A1951 /* libPods-UITableViews.a */,
 				13B3D1E3A62F229D3AF8B133 /* libPods-UITableViewsTests.a */,
 				E1DD77AA63884DF196BF5EB8 /* libPods-UITableViewsUITests.a */,
@@ -1023,6 +1031,10 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = UITableViews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sms.UITableViews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1040,6 +1052,10 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = UITableViews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sms.UITableViews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -33,11 +33,13 @@
 }
 -(void)showInfo:(InfoModel *)model
 {
+    [super showInfo:model];
+
     _videoImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:model.infoArray[0]]];
     _videoImage.userInteractionEnabled = YES;
     [_videoImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo:)]];
     _videoUrl = @"www.baidu.com"; //model.identifyUrl;
-    _videoImage.frame = CGRectMake(75, 0, kWidthOfScreen - 75-20, 180);
+    _videoImage.frame = CGRectMake(iWidthOfCell, 0, kWidthOfScreen - 75-20, 180);
     [self.contentView addSubview:_videoImage];
     
 }

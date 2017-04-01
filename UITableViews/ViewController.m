@@ -47,6 +47,8 @@ BaseInfoCellDelegate
     
     [self addAllViews];
     
+   
+    
 }
 #pragma mark - TableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -111,17 +113,17 @@ BaseInfoCellDelegate
 - (UITableView *)mainTableView
 {
     if (!_mainTableView) {
-        _mainTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _mainTableView             = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     }
-    _mainTableView.backgroundColor = [UIColor lightGrayColor];
+//    _mainTableView.backgroundColor = [UIColor lightGrayColor];
     return _mainTableView;
 }
 - (id)getJsonDataJsonname:(NSString *)jsonname
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:jsonname ofType:@"geojson"];
+    NSString *path   = [[NSBundle mainBundle] pathForResource:jsonname ofType:@"geojson"];
     NSData *jsonData = [[NSData alloc] initWithContentsOfFile:path];
     NSError *error;
-    id jsonObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    id jsonObj       = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
     if (!jsonData || error) {
         //DLog(@"JSON解码失败");
         return nil;

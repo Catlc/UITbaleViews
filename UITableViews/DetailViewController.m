@@ -19,6 +19,23 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UILabel *lab = [[UILabel alloc]init];
+    lab.backgroundColor = [UIColor redColor];
+    
+    [lab mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(10, 10, 10, 10));
+        
+        /* 等价于
+         make.top.equalTo(sv).with.offset(10);
+         make.left.equalTo(sv).with.offset(10);
+         make.bottom.equalTo(sv).with.offset(-10);
+         make.right.equalTo(sv).with.offset(-10);
+         */
+        
+        /* 也等价于
+         make.top.left.bottom.and.right.equalTo(sv).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+         */
+    }];
  
 }
 

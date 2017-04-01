@@ -36,6 +36,8 @@
 
 -(void)showInfo:(InfoModel *)model
 {
+    [super showInfo:model];
+
     
     for (UILabel *view in _baseView.subviews) {
         [view removeFromSuperview];
@@ -45,7 +47,7 @@
     
     //    NSLog(@"WetherCell %@",model);
     for (int i = 0; i<model.infoArray.count; i++) {
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(75, i*40, kWidthOfScreen, 40)];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(iWidthOfCell, i*40, kWidthOfScreen, 40)];
         lab.text = model.infoArray[i];
         [_baseView addSubview:lab];
     }

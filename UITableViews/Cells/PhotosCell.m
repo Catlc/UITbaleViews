@@ -50,17 +50,19 @@ static const NSInteger numPicsOfLine = 3;
 }
 + (CGFloat)returnCellHeight:(InfoModel *)comment
 {
-    CGFloat width = (kWidthOfScreen - 74 - picMargin * 2) / 3;
+    CGFloat width = (kWidthOfScreen - iWidthOfCell - picMargin * 2) / 3;
     return width * ((comment.infoArray.count - 1) / numPicsOfLine + 1) + 16;
 }
 -(void)showInfo:(InfoModel *)model
 {
+    [super showInfo:model];
+
     for (UIView *pic in self.pickView.subviews) {
         [pic removeFromSuperview];
     }
     _photos = [NSMutableArray arrayWithCapacity:model.infoArray.count];
     
-    CGFloat width = (kWidthOfScreen - 74 - picMargin * 2) / 3;
+    CGFloat width = (kWidthOfScreen - iWidthOfCell - picMargin * 2) / 3;
     
      
     for (int i = 0; i < model.infoArray.count; i++) {
@@ -83,7 +85,7 @@ static const NSInteger numPicsOfLine = 3;
         imageView.tag = i;
     }
     
-    self.pickView.frame = CGRectMake(74, 0, kWidthOfScreen - 74 - picMargin * 2, 0);
+    self.pickView.frame = CGRectMake(iWidthOfCell, 0, kWidthOfScreen - iWidthOfCell - picMargin * 2, 0);
     self.pickView.height = width * ((model.infoArray.count - 1) / numPicsOfLine + 1) + 16;
     
 }
