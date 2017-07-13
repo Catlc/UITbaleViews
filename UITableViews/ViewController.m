@@ -6,6 +6,8 @@
 //  Copyright © 2017年 LC. All rights reserved.
 //
 
+#define SizeScale ((kHeightOfScreen > 568) ? kHeightOfScreen/568 : 1)
+
 #define kMinHeightOfCell 80   // 这里可以给一个最小高度，实际上不会被直接使用
 
 
@@ -47,9 +49,102 @@ BaseInfoCellDelegate
     
     [self addAllViews];
     
-   
+    
     
 }
+-(UIView *)addTableHeaderView{
+    UIView *headerView = [UIView new];
+    headerView.backgroundColor = [UIColor greenColor];
+    headerView.height = 120;
+    
+    
+    //羊图片
+    UIImageView *sheepImageV = [UIImageView new];
+    sheepImageV.layer.masksToBounds = YES;
+    sheepImageV.layer.cornerRadius =  40;
+    sheepImageV.backgroundColor = [UIColor redColor];
+    [headerView addSubview:sheepImageV];
+    
+    //详情
+    UILabel *sheepDetail = [UILabel new];
+    sheepDetail.font = [UIFont systemFontOfSize:15*SizeScale];
+    sheepDetail.text = @"小尾寒羊 10月龄-201613号";
+    [headerView addSubview:sheepDetail];
+    
+    //出生
+    UILabel *sheepBorn = [UILabel new];
+    //sheepBorn.backgroundColor = [UIColor redColor];
+    //sheepBorn.textAlignment = NSTextAlignmentCenter;
+    sheepBorn.autoresizesSubviews = NO;
+    sheepBorn.font = [UIFont systemFontOfSize:11*SizeScale];
+    sheepBorn.text = @"出生:2016.10.25";
+    [headerView addSubview:sheepBorn];
+    
+    //入栏
+    UILabel *sheepIn = [UILabel new];
+    //sheepIn.backgroundColor = [UIColor blueColor];
+    sheepIn.font = [UIFont systemFontOfSize:11*SizeScale];
+    sheepIn.text = @"入栏时间:2016.10.28";
+    [headerView addSubview:sheepIn];
+    
+    //出栏
+    UILabel *sheepOut = [UILabel new];
+    sheepOut.font = [UIFont systemFontOfSize:11*SizeScale];
+    sheepOut.text = @"预计出栏时间:2017.2.28";
+    [headerView addSubview:sheepOut];
+    
+    //UI
+    [sheepImageV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(headerView).with.offset(20);
+        make.left.equalTo(headerView).with.offset(30);
+        make.width.mas_equalTo(80);
+        make.height.mas_equalTo(80);
+        
+    }];
+    
+    [sheepDetail mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(sheepImageV.mas_top).with.offset(0);
+        make.left.equalTo(sheepImageV.mas_right).with.offset(10);
+        make.right.equalTo(headerView).with.offset(-10);
+        make.height.mas_equalTo(30);
+        
+    }];
+    
+    [sheepBorn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(sheepDetail.mas_left);
+        make.top.equalTo(sheepDetail.mas_bottom).with.offset(0);
+        make.height.mas_equalTo(20);
+//        make.width.mas_equalTo(100);
+        
+    }];
+
+    [sheepIn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(sheepDetail.mas_bottom).with.offset(0);
+        make.left.mas_equalTo(sheepBorn.mas_right).with.offset(5);
+        make.right.equalTo(headerView).with.offset(-5);
+        make.height.mas_equalTo(20);
+//        make.width.mas_equalTo(100);
+    }];
+    
+    [sheepOut mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(sheepIn.mas_bottom).with.offset(0);
+        make.left.mas_equalTo(sheepDetail.mas_left);
+        make.height.mas_equalTo(20);
+        make.right.equalTo(headerView).with.offset(-10);
+        
+    }];
+    
+    return headerView;
+    
+//    self.mainTableView.tableHeaderView = headerView;
+}
+
+
 #pragma mark - TableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -77,6 +172,14 @@ BaseInfoCellDelegate
     return cell;
     
 }
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [self addTableHeaderView];
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 120;
+}
 - (void)didClickImageAtIndex:(NSInteger)index withAssets:(NSArray *)assets
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -100,13 +203,17 @@ BaseInfoCellDelegate
     Class cellClass = NSClassFromString(cellConfig.className);
     
     return [cellConfig heightCachedWithCalculateBlock:^CGFloat{
-        return [cellClass returnCellHeight: self.infoArray[indexPath.row]];
+        return [cellClass returnCellHeight: self.infoArray[indexPath.row]] + 20;
     }];
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"点击Cell");
+    
+}
+- (void)viewWillLayoutSubviews
+{
     
 }
 #pragma mark - get
@@ -116,7 +223,11 @@ BaseInfoCellDelegate
         _mainTableView             = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     }
 //    _mainTableView.backgroundColor = [UIColor lightGrayColor];
+      _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+      _mainTableView.showsVerticalScrollIndicator  = NO;
+    
     return _mainTableView;
+    
 }
 - (id)getJsonDataJsonname:(NSString *)jsonname
 {
@@ -192,8 +303,6 @@ BaseInfoCellDelegate
     [self.view addSubview:self.mainTableView];
     
 }
-
-
 
 -(void)sharePush
 {

@@ -7,42 +7,76 @@
 //
 
 #import "DetailViewController.h"
+#import "MessageSender.h"
+#import "UIView+ExtendTouchRect.h"
 
 @interface DetailViewController ()
+ 
 
 @end
 
 @implementation DetailViewController
+{
+    CGFloat imageviewAngle;
+    CGFloat angle;
+    UIImageView *imageView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UILabel *lab = [[UILabel alloc]init];
-    lab.backgroundColor = [UIColor redColor];
+    BaseMessage *message = [BaseMessage new];
+    [[MessageSender sharedMessageSender] sendMessage:message withStrategy:MessageSendStrategyText];
     
-    [lab mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(10, 10, 10, 10));
+    imageView = [[UIImageView alloc]init];
+    imageView.backgroundColor = [UIColor redColor];
+    imageView.frame = CGRectMake(90, 90, 100, 100);
+    [self.view addSubview:imageView];
+    
+//    [button mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(200, 50, 200, 50));
         
-        /* 等价于
-         make.top.equalTo(sv).with.offset(10);
-         make.left.equalTo(sv).with.offset(10);
-         make.bottom.equalTo(sv).with.offset(-10);
-         make.right.equalTo(sv).with.offset(-10);
-         */
-        
-        /* 也等价于
-         make.top.left.bottom.and.right.equalTo(sv).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
-         */
-    }];
- 
+//    }];
+    
+//    button.touchExtendInset = UIEdgeInsetsMake(-10, -10, -10, -10);
+    
+    [self startAnimationS];
+    
+}
+-(void) startAnimation
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.01];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(endAnimation)];
+    imageView.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
+    [UIView commitAnimations];
 }
 
+-(void)endAnimation
+{
+    angle += 10;
+    [self startAnimation];
+}
+
+- (void)startAnimationS
+{
+    CGAffineTransform endAngle = CGAffineTransformMakeRotation(imageviewAngle * (M_PI / 180.0f));
+    
+    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        imageView.transform = endAngle;
+    } completion:^(BOOL finished) {
+        angle += 10; [self startAnimationS];
+    }];
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   }
 
+}
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

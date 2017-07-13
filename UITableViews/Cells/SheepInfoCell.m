@@ -31,7 +31,7 @@
 
 + (CGFloat)returnCellHeight:(InfoModel *)comment
 {
-    return comment.infoArray.count *40;
+    return comment.infoArray.count *30;
 }
 
 -(void)showInfo:(InfoModel *)model
@@ -42,12 +42,12 @@
     for (UILabel *view in _baseView.subviews) {
         [view removeFromSuperview];
     }
-    self.baseView.frame = CGRectMake(0, 0, kWidthOfScreen, model.infoArray.count *40);
+    self.baseView.frame = CGRectMake(0, 10, kWidthOfScreen, model.infoArray.count *30);
 
     
     //    NSLog(@"WetherCell %@",model);
     for (int i = 0; i<model.infoArray.count; i++) {
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(iWidthOfCell, i*40, kWidthOfScreen, 40)];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(iWidthOfCell, i*30, kWidthOfScreen, 30)];
         lab.text = model.infoArray[i];
         [_baseView addSubview:lab];
     }

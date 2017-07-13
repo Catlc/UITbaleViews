@@ -12,11 +12,12 @@
 #import "ZLPhotoPickerBrowserViewController.h"
 
 static const CGFloat picMargin = 4;
-static const NSInteger numPicsOfLine = 3;
+static const NSInteger numPicsOfLine = 4;
 @interface PhotosCell ()
 
 @property (nonatomic, strong) NSMutableArray *photos;
-@property (nonatomic,strong)UIView *pickView;
+@property (nonatomic,strong)  UIView         *pickView;
+@property (nonatomic,strong)  UILabel        *commLab;
 
 @end
 
@@ -48,6 +49,15 @@ static const NSInteger numPicsOfLine = 3;
     return _pickView;
     
 }
+-(UILabel *)commLab{
+    if (!_commLab) {
+        _commLab = [UILabel new];
+        _commLab.font = [UIFont systemFontOfSize:15];
+        _commLab.textAlignment  = NSTextAlignmentLeft;
+        [self.contentView addSubview:_commLab];
+    }
+    return _commLab;
+}
 + (CGFloat)returnCellHeight:(InfoModel *)comment
 {
     CGFloat width = (kWidthOfScreen - iWidthOfCell - picMargin * 2) / 3;
@@ -62,13 +72,13 @@ static const NSInteger numPicsOfLine = 3;
     }
     _photos = [NSMutableArray arrayWithCapacity:model.infoArray.count];
     
-    CGFloat width = (kWidthOfScreen - iWidthOfCell - picMargin * 2) / 3;
+    CGFloat width = (kWidthOfScreen - iWidthOfCell - 30 - picMargin * 2) / 4;
     
      
     for (int i = 0; i < model.infoArray.count; i++) {
         NSInteger row = i / numPicsOfLine;
         NSInteger col = i % numPicsOfLine;
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((width + picMargin) * col, (width + picMargin) * row, width, width)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((width + picMargin) * col, picMargin + (width + picMargin) * row, width, width)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         NSString *imageUrl = model.infoArray[i];
@@ -85,9 +95,12 @@ static const NSInteger numPicsOfLine = 3;
         imageView.tag = i;
     }
     
-    self.pickView.frame = CGRectMake(iWidthOfCell, 0, kWidthOfScreen - iWidthOfCell - picMargin * 2, 0);
+    self.pickView.frame = CGRectMake(iWidthOfCell, 0, kWidthOfScreen - iWidthOfCell - picMargin * 2 , 0);
     self.pickView.height = width * ((model.infoArray.count - 1) / numPicsOfLine + 1) + 16;
-    
+    self.commLab.frame = CGRectMake(0,  self.pickView.bottom , 100, 30);
+ 
+    [self.pickView addSubview:self.commLab];
+    self.commLab.text = @"成长期照片";
 }
 - (void)scanPicture:(UITapGestureRecognizer *)tap {
     

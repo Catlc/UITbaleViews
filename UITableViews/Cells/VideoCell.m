@@ -39,7 +39,7 @@
     _videoImage.userInteractionEnabled = YES;
     [_videoImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo:)]];
     _videoUrl = @"www.baidu.com"; //model.identifyUrl;
-    _videoImage.frame = CGRectMake(iWidthOfCell, 0, kWidthOfScreen - 75-20, 180);
+    _videoImage.frame = CGRectMake(iWidthOfCell, 0, kWidthOfScreen - iWidthOfCell - 30, 180);
     [self.contentView addSubview:_videoImage];
     
 }

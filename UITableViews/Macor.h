@@ -14,6 +14,8 @@
 #import "BaseInfoCell.h"
 #import "Masonry.h"
 
+
+
 #endif /* Macor_h */
 
 #define kWidthOfScreen  [UIScreen mainScreen].bounds.size.width

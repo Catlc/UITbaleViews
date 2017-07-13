@@ -24,24 +24,50 @@
 //        self.tlineLab.frame  = CGRectMake(self.timeLab.right+15, 0, .5, 20);
 //        self.typeImageV.frame = CGRectMake(self.tlineLab.centerX-15, self.tlineLab.bottom, 30, 30);
 //        self.blineLab.frame  = CGRectMake(self.tlineLab.centerX, self.typeImageV.bottom, .5, 30);
+        
         /// 设置约束 方法二 （Masonry）
+        [self.timeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.contentView).with.offset(15);
+            make.left.equalTo(self.contentView).with.offset(10);
+            make.height.mas_equalTo(40);
+            make.width.mas_equalTo(60);
+            
+            /* 等价于
+             make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(10, 10, 10, 10));
+             */
+            /* 也等价于
+             make.top.left.bottom.and.right.equalTo(sv).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+             */
+        }];
         
+        [self.tlineLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+          
+            make.top.equalTo(self.contentView).with.offset(0);
+            make.left.equalTo(self.timeLab.mas_right).with.offset(10);
+            make.height.mas_equalTo(20);
+            make.width.mas_equalTo(.5);
+            
+        }];
         
-//        [self.timeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(10, 10, 10, 10));
-//            
-//            /* 等价于
-//             make.top.equalTo(sv).with.offset(10);
-//             make.left.equalTo(sv).with.offset(10);
-//             make.bottom.equalTo(sv).with.offset(-10);
-//             make.right.equalTo(sv).with.offset(-10);
-//             */
-//            
-//            /* 也等价于
-//             make.top.left.bottom.and.right.equalTo(sv).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
-//             */
-//        }];
+        [self.typeImageV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.tlineLab.mas_bottom).with.offset(0);
+            make.centerX.mas_equalTo(self.tlineLab.mas_centerX);
+            make.height.mas_equalTo(30);
+            make.width.mas_equalTo(30);
+            
+            
+        }];
         
+        [self.blineLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+            make.top.equalTo(self.typeImageV.mas_bottom).with.offset(0);
+            make.left.equalTo(self.timeLab.mas_right).with.offset(10);
+            make.bottom.equalTo(self.contentView).with.offset(0);
+            make.width.mas_equalTo(.5);
+        
+        }];
         
         
     }
